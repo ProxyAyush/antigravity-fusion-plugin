@@ -5,7 +5,7 @@ Multi-model fusion which achieves Claude Fable 5 level performance for Antigravi
 > *Cast your prompt into a solitary mind, and you receive a mere response.*
 > *But weave a million tokens across a chorus of State-of-the-Art intellects, and you uncover the truth."*
 
-![DRACO benchmark scores](https://openrouter.ai/blog/images/blog/fusion-benchmark-chart.png)
+![DRACO benchmark scores](1781544730189.png)
 
 [📸 View an Example Run in the CLI](IMG_20260615_185839.jpg)
 
