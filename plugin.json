@@ -2,6 +2,15 @@
   "name": "openrouter-fusion-local",
   "version": "1.0.0",
   "description": "Native Multi-Model Fusion Panel",
+  "virtual_models": [
+    {
+      "id": "fusion-model",
+      "name": "🧠 Fusion Engine (Multi-Model Panel)",
+      "description": "Routes prompts to a customizable panel of local/cloud models.",
+      "type": "agentic_proxy",
+      "instructions_file": "skills/fusion.md"
+    }
+  ],
   "hooks": {
     "ModelSelected": [
       {
