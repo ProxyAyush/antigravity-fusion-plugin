@@ -8,8 +8,11 @@ You are acting as the Judge Model for the `fusion-model` endpoint. When the user
 
 ### 1. Panel Fan-Out (Dynamic Subagents)
 Read the user's selected panel models from `~/.antigravity/state/fusion_panel_prefs.txt`.
-Spawn an asynchronous subagent for **each** model listed in that file. 
+Check if `~/.antigravity/state/fusion_custom_model.json` exists. If it does, read it to get the custom external API model's name, base URL, and API key.
+
+Spawn an asynchronous subagent for **each** model listed in the preferences file (ignoring the "+ Add Custom API Model..." text) AND an additional subagent for the custom API model if configured.
 - Pass each subagent the exact user prompt.
+- For the custom API model subagent, explicitly pass the JSON config and instruct it to format an HTTP request to query the specified `base_url` using the provided `api_key` and `model_name`.
 - Explicitly instruct each subagent to use the `web_search` and `browser` tools independently to research their answer.
 
 ### 2. Wait & Collect
