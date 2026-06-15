@@ -67,3 +67,29 @@ The agent will:
 ## 📚 References
 - [OpenRouter Fusion API Docs](https://openrouter.ai/docs/guides/features/plugins/fusion)
 - [Fusion Beats Frontier Benchmark](https://openrouter.ai/blog/announcements/fusion-beats-frontier/)
+
+## ❓ FAQ
+
+<details>
+<summary>▶️ Who is the judge model and how can I change it?</summary>
+<br>
+The Judge Model is simply the model you currently have active in your CLI window when you run the `/fusion` command. To change the judge model, just switch your active model in the CLI before invoking fusion. For example, if you want Claude to judge Gemini and GPT, just select Claude as your active CLI model!
+</details>
+
+<details>
+<summary>▶️ How can I easily change the models inside the fusion panel?</summary>
+<br>
+On your first run, the agent will ask you to set up your panel. If you want to change them later, you can simply edit the `~/.fusion_panel_prefs.txt` file and update the list of models (one per line). Alternatively, just delete that file and the agent will prompt you to set them up again on your next run.
+</details>
+
+<details>
+<summary>▶️ Can this be used in other CLIs like Claude Code and Codex?</summary>
+<br>
+Yes! Because Fusion is purely a prompt-and-skill-driven workflow, it works universally. See the Installation section above for instructions on how to drop the `fusion.md` file into your CLI of choice.
+</details>
+
+<details>
+<summary>▶️ Where does the final synthesized answer go?</summary>
+<br>
+To keep your chat clean, the final synthesis is not printed in the terminal. Instead, the agent saves it to a `synthesis.md` file in your current working directory. The chat will only show you the spinning banner and the final telemetry table.
+</details>
