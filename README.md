@@ -36,14 +36,14 @@ agy plugin install ./antigravity-fusion-plugin
 Claude Code automatically scans `SKILL.md` files in your `.claude/skills` directory.
 ```bash
 mkdir -p ~/.claude/skills/fusion
-curl -o ~/.claude/skills/fusion/SKILL.md https://raw.githubusercontent.com/ProxyAyush/antigravity-fusion-plugin/master/skills/fusion.md
+curl -o ~/.claude/skills/fusion/SKILL.md https://raw.githubusercontent.com/ProxyAyush/antigravity-fusion-plugin/master/skills/fusion/SKILL.md
 ```
 
 ### For Codex CLI
 Codex CLI automatically scans `SKILL.md` files in your `.codex/skills` directory.
 ```bash
 mkdir -p ~/.codex/skills/fusion
-curl -o ~/.codex/skills/fusion/SKILL.md https://raw.githubusercontent.com/ProxyAyush/antigravity-fusion-plugin/master/skills/fusion.md
+curl -o ~/.codex/skills/fusion/SKILL.md https://raw.githubusercontent.com/ProxyAyush/antigravity-fusion-plugin/master/skills/fusion/SKILL.md
 ```
 
 ## 📖 Usage
@@ -88,7 +88,7 @@ On your first run, the agent will ask you to set up your panel. If you want to c
 <details>
 <summary>▶️ Can this be used in other CLIs like Claude Code and Codex?</summary>
 <br>
-Yes! Because Fusion is purely a prompt-and-skill-driven workflow, it works universally. See the Installation section above for instructions on how to drop the `fusion.md` file into your CLI of choice.
+Yes! Because Fusion is purely a prompt-and-skill-driven workflow, it works universally. See the Installation section above for instructions on how to drop the `SKILL.md` file into your CLI of choice.
 </details>
 
 <details>
