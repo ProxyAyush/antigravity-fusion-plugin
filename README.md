@@ -16,6 +16,8 @@ Multi-model fusion for Antigravity, Claude Code, and Codex CLI. Ask multiple mod
 
 Fusion is inspired by OpenRouter's [**Fusion beats Frontier**](https://openrouter.ai/blog/announcements/fusion-beats-frontier/): dispatch a prompt to a panel of models, then have a judge synthesize their answers into one response that beats any single frontier model. This plugin brings that pattern locally. The panel subagents answer as read-only advisors, and their answers are judged and fused into one before the main model acts on it.
 
+More Benchmarking coming soon! 
+
 ---
 
 ## 🚀 Installation
