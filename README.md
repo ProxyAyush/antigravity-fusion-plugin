@@ -1,6 +1,6 @@
 # Universal Fusion Plugin 🧠
 
-Multi-model fusion for Antigravity, Claude Code, and Codex CLI. Ask multiple models (e.g. Gemini 3.5 Flash, Gemini 3.1 Pro, Claude Sonnet, etc.) in parallel, then judge their answers into one and act on it.
+Multi-model fusion for Google Antigravity CLI. Ask multiple models (e.g. Gemini 3.5 Flash, Gemini 3.1 Pro, etc.) in parallel, then judge their answers into one and act on it.
 
 > *“The more tokens you throw at SOTA models, the better the answer.*
 > *Cast your prompt into a solitary mind, and you receive a mere response.*
@@ -24,22 +24,10 @@ More Benchmarking coming soon!
 
 Because Fusion is purely prompt-and-skill-driven, you can install it into any modern agentic CLI.
 
-### For Antigravity CLI
+For Antigravity CLI:
 ```bash
 git clone https://github.com/ProxyAyush/antigravity-fusion-plugin.git
 agy plugin install ./antigravity-fusion-plugin
-```
-
-### For Claude Code
-```bash
-/plugin marketplace add /path/to/antigravity-fusion-plugin
-/plugin install fusion@fusion
-```
-
-### For Codex CLI
-```bash
-/plugin marketplace add /path/to/antigravity-fusion-plugin
-/plugin install fusion@fusion
 ```
 
 ---
@@ -60,7 +48,7 @@ It will detect available models and help you configure your preference file: `~/
 
 | Command | What it does |
 | --- | --- |
-| `/fusion:fuse <task>` | Ask multiple models in parallel, synthesize one fused answer, then act on it. |
+| `/fusion <task>` | Ask multiple models in parallel, synthesize one fused answer, then act on it. |
 | `/fusion:setup` | Check available models in your CLI and verify preferences. |
 | `/fusion:config [show \| set <models>]` | View or change settings (model panel configuration) in your preference file. |
 
@@ -80,7 +68,7 @@ Easiest way to change settings is the `config` command:
 
 ```bash
 /fusion:config show                       # Show configured models
-/fusion:config set Gemini 3.5 Flash (High), Claude Sonnet 4.6 (Thinking) # Overwrite preferences
+/fusion:config set Gemini 3.5 Flash (High), Gemini 3.1 Pro (High) # Overwrite preferences
 ```
 
 Or edit the file directly (`~/.fusion_panel_prefs.txt`):
@@ -88,8 +76,11 @@ Or edit the file directly (`~/.fusion_panel_prefs.txt`):
 ```text
 Gemini 3.5 Flash (High)
 Gemini 3.1 Pro (High)
-Claude Sonnet 4.6 (Thinking)
+Gemini 3.5 Flash (Medium)
 ```
+
+> [!NOTE]
+> Any model supported by your CLI environment (such as Claude Sonnet, Opus, or GPT-OSS models returned by `agy models`) can be configured as panel advisors.
 
 ---
 
@@ -98,7 +89,7 @@ Claude Sonnet 4.6 (Thinking)
 <details>
 <summary>▶️ Who is the judge model and how can I change it?</summary>
 <br>
-The Judge Model is simply the model you currently have active in your CLI window when you run the `/fusion` command. To change the judge model, just switch your active model in the CLI before invoking fusion. For example, if you want Claude to judge Gemini and GPT, just select Claude as your active CLI model!
+The Judge Model is simply the model you currently have active in your CLI window when you run the `/fusion` command. To change the judge model, just switch your active model in the CLI before invoking fusion. For example, if you want Gemini 3.1 Pro (High) to judge Gemini 3.5 Flash, just select Gemini 3.1 Pro (High) as your active CLI model!
 </details>
 
 <details>
@@ -107,11 +98,6 @@ The Judge Model is simply the model you currently have active in your CLI window
 You can easily adjust settings using the `/fusion:config set` command or edit `~/.fusion_panel_prefs.txt`.
 </details>
 
-<details>
-<summary>▶️ Can this be used in other CLIs like Claude Code and Codex?</summary>
-<br>
-Yes! Fusion is fully compatible with Claude Code, Codex, and Antigravity. It registers standard slash commands and runs completely locally using standard plugin mechanisms.
-</details>
 
 <details>
 <summary>▶️ Where does the final synthesized answer go?</summary>

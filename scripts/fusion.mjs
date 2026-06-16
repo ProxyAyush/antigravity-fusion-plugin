@@ -39,9 +39,7 @@ function runCommand(cmd, args, { cwd, timeoutMs, env } = {}) {
 }
 
 function detectCLI() {
-  // If we have ANTIGRAVITY env, we use agy
-  if (process.env.ANTIGRAVITY_AGENT || process.env.ANTIGRAVITY_LS_ADDRESS) return "agy";
-  return "agy"; // Default to agy
+  return "agy";
 }
 
 // Config/Prefs helpers
@@ -123,14 +121,9 @@ async function cmdFuse(opts) {
   // Spawn subprocesses in parallel
   const results = await Promise.all(prefs.map(async (model) => {
     // Inject system instructions to keep it read-only
-    const decoratedPrompt = `[SYSTEM INSTRUCTION: You are a read-only advisor in a multi-model panel. Do NOT edit any files, write to the workspace, or run commands. Simply provide your best answer/analysis for the task below.]\n\nTask:\n${prompt}`;
+    const decoratedPrompt = `[SYSTEM INSTRUCTION: You are ${model}, a read-only advisor in a multi-model panel. Do NOT edit any files, write to the workspace, or run commands. Simply provide your best answer/analysis for the task below.]\n\nTask:\n${prompt}`;
     
-    let args = [];
-    if (cli === "agy") {
-      args = ["--model", model, "--print", decoratedPrompt];
-    } else {
-      args = ["-m", model, "-p", decoratedPrompt];
-    }
+    const args = ["--model", model, "--print", decoratedPrompt];
 
     const r = await runCommand(cli, args, { cwd, timeoutMs });
     return {
