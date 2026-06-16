@@ -82,6 +82,13 @@ Gemini 3.5 Flash (Medium)
 > [!NOTE]
 > Any model supported by your CLI environment (such as Claude Sonnet, Opus, or GPT-OSS models returned by `agy models`) can be configured as panel advisors.
 
+
+## 💡 Architecture & Community Notes
+
+- **Automated Blind-Drafting**: In response to early community architecture reviews, we are actively transitioning away from hardcoded global preferences (`~/.fusion_panel_prefs.txt`) toward repository-governed configurations (`.fusion.json`) and automated task-specific blind-drafting presets.
+- **Task Log Auditing for Large Contexts**: During deep research or long coding sessions, subagent outputs can become extremely large, leading to terminal truncation. The orchestrator now writes complete, untruncated subagent traces directly to temporary task log files (e.g., `/tmp/agy-task-*.log`), which are read in full by the Judge model before performing final synthesis.
+- **Isolated Execution**: We run subagents in parallel with the print-mode flag (`--print`), instructing them to act strictly in a read-only advisory capacity. This allows them to analyze project structure without causing race conditions or generating conflicting file writes.
+
 ---
 
 ## ❓ FAQ
@@ -98,7 +105,6 @@ The Judge Model is simply the model you currently have active in your CLI window
 You can easily adjust settings using the `/fusion:config set` command or edit `~/.fusion_panel_prefs.txt`.
 </details>
 
-
 <details>
 <summary>▶️ Where does the final synthesized answer go?</summary>
 <br>
@@ -109,9 +115,37 @@ If you choose to read, the agent will load and show `synthesis.md` using its vie
 </details>
 
 <details>
-<summary>▶️ Does this actually call different API models under the hood?</summary>
+<summary>▶️ Doesn't Antigravity natively force subagents to inherit the main model type? How do you bypass this?</summary>
 <br>
-Yes! To bypass the limitations of CLI subagents inheriting the parent model, the Fusion orchestrator spins up actual parallel background subprocesses of the host CLI with different model parameters (e.g. `agy --model "[Model Name]"`). This forces separate agentic runs to execute under different model configurations/endpoints, which are then read, analyzed, and synthesized by the Judge.
+Spot on. One of the core limitations of native CLI subagents is that they are bound to the parent agent's active model architecture. 
+
+To circumvent this, the Fusion plugin acts as a **Meta-Orchestrator**. Instead of calling the native tool, it triggers your host terminal execution tool to spin up completely detached background bash subprocesses (`agy --model "[Advisor Model]" --print "Prompt" > /tmp/fusion_[model].txt &`). This forces separate agentic processes to execute under entirely distinct configurations, which are then clean-read and aggregated into your active session.
+</details>
+
+<details>
+<summary>▶️ Can advisor models call tools or make destructive file edits in parallel?</summary>
+<br>
+No. To prevent repository chaos, conflicting edits, or infinite tool-calling loops, the panel advisors are strictly restricted to a <b>read-only advisory role</b>. They are invoked using print-mode execution wrappers and prompt injections that strip workspace-modifying capabilities. The heavy thinking happens in parallel, but the primary Judge model is the sole authority permitted to execute file writes or workspace commands.
+</details>
+
+<details>
+<summary>▶️ Is the performance boost just an expensive pass@N brute-force effect?</summary>
+<br>
+It's a common misconception to equate this with a standard <code>pass@3</code> run. In a single-model multiple-pass configuration, you are evaluating identical architectural biases and training distributions multiple times. 
+
+Fusion runs diverse model architectures (e.g., Anthropic, Google, DeepSeek) in parallel. Each brings a completely distinct "way of thinking" and localized dataset optimization to the problem. The Judge isn't just looking for a majority vote; it is performing a semantic synthesis to bridge contradictions and catch blind spots before execution.
+</details>
+
+<details>
+<summary>▶️ Does it make sense to fuse models from the same family (e.g., Gemini 3.1 Pro + Gemini 3.5 Flash)?</summary>
+<br>
+For optimal results, <b>mix your model families</b>. If the underlying training data and architectural lineage are nearly identical, the models share the same systemic blind spots, yielding little behavioral advantage. The real "fusion edge" occurs when you introduce cross-vendor dataset diversity—combining different provider strengths to eliminate localized model hallucinations.
+</details>
+
+<details>
+<summary>▶️ The DRACO benchmark targets Deep Research. Does Fusion actually benefit hard coding?</summary>
+<br>
+Yes, but it shifts where the value is delivered. While standalone frontier reasoning models excel at fluid, inline code generation, Fusion is built for the critical <b>planning, structural architecture, and debugging alignment</b> stages. By forcing a multi-model council to audit your project blueprint before a single line of code is written, you drastically minimize project drift and optimize your token efficiency during downstream development.
 </details>
 
 ---
