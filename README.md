@@ -1,6 +1,6 @@
 # Universal Fusion Plugin 🧠
 
-Multi-model fusion for Google Antigravity CLI. Ask multiple models (e.g. Gemini 3.5 Flash, Gemini 3.1 Pro, etc.) in parallel, then judge their answers into one and act on it.
+Multi-model fusion for Google Antigravity CLI(Works on Claude Code and Codex too). Ask multiple models (e.g. Gemini 3.5 Flash, Gemini 3.1 Pro, etc.) in parallel, then judge their answers into one and act on it.
 
 > *“The more tokens you throw at SOTA models, the better the answer.*
 > *Cast your prompt into a solitary mind, and you receive a mere response.*
